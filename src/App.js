@@ -1,5 +1,6 @@
-import React from "react"
+import React, { useState } from "react"
 import Game from "./Components/Game"
+import SizeDropdown from "./Components/SizeDropdown"
 
 // Skapa spelbräde 4x4 skall kodas in i variabler
 // lägg till block ( 4x4-1 )
@@ -12,9 +13,23 @@ import Game from "./Components/Game"
 
 
 export default function App(){
+    const [rows,setRows] = useState(5)
+    const [columns,setColumns] = useState(6)
+
+    const handleChange = ((e)=>{
+        if(e.target.id==="rows")
+            setRows(parseInt(e.target.value))
+        else if(e.target.id==="columns")
+            setColumns(parseInt(e.target.value))
+    })
+
+    console.log(rows, columns)
+
     return(
         <div>
-            <Game rows={4} colums={4} />
+            <SizeDropdown id={"rows"} default={rows} handleChange={handleChange}/>
+            <SizeDropdown id={"columns"} default={columns} handleChange={handleChange}/>
+            <Game rows={rows} columns={columns} />
         </div>
     )
 }

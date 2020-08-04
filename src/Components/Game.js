@@ -3,7 +3,7 @@ import Board from "./Board";
 import Block from "./Block";
 
 export default function Game(props){
-    const {colums, rows} = props;
+    const {columns, rows} = props;
     const [bricks, setBricks] = useState([]);
     const [moveBrickTo, setMoveBrickTo] = useState({
         id: -1,
@@ -13,21 +13,21 @@ export default function Game(props){
 
     useEffect(() =>{
         var createBricks = []
-        for(var i=0;i<(colums*rows);i++){
+        for(var i=0;i<(columns*rows);i++){
             createBricks.push(i);
         }
         createBricks = shuffle(createBricks)
         setBricks(createBricks)
-    }, [colums,rows])
+    }, [columns,rows])
 
-    const shuffle = (createBricks)=>{
+    const shuffle = (shuffleBricks)=>{
         for(var i=0;i<30;i++){
-            var brickToMove=Math.floor(Math.random()*15)
-            createBricks.splice(brickToMove,0,createBricks[createBricks.length-1])
-            createBricks.pop()
+            var brickToMove=Math.floor(Math.random()*shuffleBricks.length-1)
+            shuffleBricks.splice(brickToMove,0,shuffleBricks[shuffleBricks.length-1])
+            shuffleBricks.pop()
         }
         // kolla upp så att den inte redan är löst
-        return createBricks
+        return shuffleBricks
     }
 
     const handleClick = ((num)=>{
@@ -81,8 +81,8 @@ export default function Game(props){
 
     return(
         <div>
-            <h1 style = {{textAlign: "center", margin: "25px"}} >Here is the board {colums} x {rows}</h1>
-            <Board bricks={bricksToShow} rows={rows} handleClick={handleClick}/>
+            <h1 style = {{textAlign: "center", margin: "25px"}} >Here is the board {columns} x {rows}</h1>
+            <Board bricks={bricksToShow} rows={rows} columns={columns} handleClick={handleClick}/>
         </div>
     )
 }
