@@ -12,6 +12,7 @@
 }
 .board{
     border: 3px solid red;
+    background-color: burlywood;
     width: 70vmin;
     height: 70vmin;
     margin: 0 auto;
@@ -21,7 +22,7 @@
 .board_row{
     display: table-row;
 }
-.brick{
+.brick,.move_left,.move_right,.move_up,.move_down{
     display: table-cell;
     text-align: center;
     vertical-align: middle;
@@ -30,8 +31,38 @@
     min-height: 5vmin;
     font-weight: 800;
     font-size: 6vmin;
+    background-color: blanchedalmond;
 }
 .no_brick{
     display: table-cell;
-    background: burlywood;
+}
+
+.move_left{
+    animation: animation_left 0.3s ease-out;
+}
+.move_right{
+    animation: animation_right 0.3s ease-out;
+}
+.move_up{
+    animation: animation_up 0.3s ease-out;
+}
+.move_down{
+    animation: animation_down 0.3s ease-out;
+}
+
+@keyframes animation_left{
+    from {transform: translateX(100%);}
+    to {transform: translateX(0%);}
+}
+@keyframes animation_right{
+    from {transform: translateX(-100%);}
+    to {transform: translateX(0%);}
+}
+@keyframes animation_up{
+    from {transform: translateY(100%);}
+    to {transform: translateX(0%);}
+}
+@keyframes animation_down{
+    from {transform: translateY(-100%);}
+    to {transform: translateX(0%);}
 }

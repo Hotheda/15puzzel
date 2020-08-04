@@ -5,6 +5,11 @@ import Block from "./Block";
 export default function Game(props){
     const {colums, rows} = props;
     const [bricks, setBricks] = useState([]);
+    const [moveBrickTo, setMoveBrickTo] = useState({
+        id: -1,
+        direction: null
+    })
+
 
     useEffect(() =>{
         var createBricks = []
@@ -13,9 +18,8 @@ export default function Game(props){
         }
         createBricks = shuffle(createBricks)
         setBricks(createBricks)
-    }, [])
+    }, [colums,rows])
 
-    
     const shuffle = (createBricks)=>{
         for(var i=0;i<30;i++){
             var brickToMove=Math.floor(Math.random()*15)
@@ -30,8 +34,9 @@ export default function Game(props){
         const id = bricks.findIndex(element=>element===num)
         const idOfEmpty = bricks.findIndex(element=>element===0)
 
-        if(checkIfNeghborIsEmpty(id,idOfEmpty)){
-            moveBrick(id,idOfEmpty)
+        var direction = checkIfNeghborIsEmpty(id,idOfEmpty)
+        if(direction){
+            moveBrick(id,idOfEmpty,direction)
         }
     })
 
@@ -39,30 +44,30 @@ export default function Game(props){
 
         
         if( (id-1) === idOfEmpty && id%rows) {
-            return true;
+            return "move_left";
         }else if( (id+1) === idOfEmpty && (id+1)%rows){
-            return true;
+            return "move_right";
         }else if( (id-rows) === idOfEmpty){
-            return true;
+            return "move_up";
         }else if( (id+rows) === idOfEmpty){
-            return true;
+            return "move_down";
         }else{
             return false;
         }
     })
 
-    const moveBrick = ((id,idOfEmpty)=>{
+    const moveBrick = ((id,idOfEmpty,direction)=>{
         var bricksMoved = [...bricks]
         bricksMoved[idOfEmpty] = bricksMoved[id]
         bricksMoved[id] = 0
         setBricks(bricksMoved)
         checkOrder(bricksMoved)
+        setMoveBrickTo({id: bricksMoved[idOfEmpty], direction: direction})
     })
 
     const checkOrder = ((bricksMoved)=>{
         for(var i=0;i<bricksMoved.length-1;i++){
             if(bricksMoved[i] !== i+1){
-                console.log(bricksMoved[i], (i+1))
                 return false;
             }
         }
@@ -71,7 +76,7 @@ export default function Game(props){
     })
 
     var bricksToShow = bricks.map((num)=>{return(
-        <Block key={num} brick_number={num} handleClick={handleClick}/>
+        <Block key={num} brick_number={num} moveBrickTo={moveBrickTo} handleClick={handleClick}/>
     )})
 
     return(
