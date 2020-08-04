@@ -8,7 +8,7 @@ export default function Game(props){
 
     useEffect(() =>{
         var createBricks = []
-        for(var i=0;i<=15;i++){
+        for(var i=0;i<(colums*rows);i++){
             createBricks.push(i);
         }
         createBricks = shuffle(createBricks)

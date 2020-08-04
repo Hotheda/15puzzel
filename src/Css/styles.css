@@ -12,27 +12,26 @@
 }
 .board{
     border: 3px solid red;
-    width: fit-content;
-    height: fit-content;
-    margin: 50px auto;
-
+    width: 70vmin;
+    height: 70vmin;
+    margin: 0 auto;
+    display: table;
+    table-layout: fixed;
 }
 .board_row{
-    display: flex;
+    display: table-row;
 }
 .brick{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    padding: 5px;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
     border: 1px solid black;
+    min-width: 5vmin;
+    min-height: 5vmin;
+    font-weight: 800;
+    font-size: 6vmin;
 }
 .no_brick{
-    display: flex;
-    width: 50px;
-    height: 50px;
-    padding: 5px;
+    display: table-cell;
     background: burlywood;
 }
