@@ -8,6 +8,7 @@ import Game from "./Components/Game"
 // flytta brickor genom att klicka på brickan bredvid tom ruta
 // lägg till knapp för att blanda block
 // När puzzlet är löst skall detta visas för användaren
+// kontrollera så inte puzzlet är löst direkt
 
 
 export default function App(){
