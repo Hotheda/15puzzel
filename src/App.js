@@ -13,8 +13,8 @@ import SizeDropdown from "./Components/SizeDropdown"
 
 
 export default function App(){
-    const [rows,setRows] = useState(5)
-    const [columns,setColumns] = useState(6)
+    const [rows,setRows] = useState(2)
+    const [columns,setColumns] = useState(2)
 
     const handleChange = ((e)=>{
         if(e.target.id==="rows")

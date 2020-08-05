@@ -29,6 +29,22 @@
     align-items: center;
     padding: 1%;
 }
+.winner_text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color: azure;
+    opacity: 0.7;
+    width: 70vmin;
+    height: 70vmin;
+    z-index: 100;
+    position: absolute;
+    margin: 0 auto;
+    transform: translateY(-100%);
+    left: calc(50% - 35vmin);
+    font-size: calc(1vw + 1vh + 1vmin );
+}
 
 .no_brick{
     display: table-cell;

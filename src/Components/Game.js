@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import Board from "./Board";
 import Block from "./Block";
-import Shuffle from "./Shuffle"
+import ShuffleButton from "./ShuffleButton"
 import Winner from "./Winner"
 
 export default function Game(props){
@@ -93,19 +93,11 @@ export default function Game(props){
         setBricks(shuffle(bricks))
     })
 
-    if(gameOver){
-        return(
-            <div>
-                <Winner />
-                <Shuffle />
-            </div>
-        )
-    }else{
-        return(
-            <div>
-                <Board bricks={bricksToShow} rows={rows} columns={columns} handleClick={handleClick}/>
-                <Shuffle shuffleBricks={shuffleBricks}/>
-            </div>
-        )
-    }
+    return(
+        <div>
+            <Board bricks={bricksToShow} rows={rows} columns={columns} handleClick={handleClick}/>
+            {gameOver ? <Winner/> : null}
+            <ShuffleButton shuffleBricks={shuffleBricks}/>
+        </div>
+    )
 }
