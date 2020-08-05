@@ -11,23 +11,25 @@ import SizeDropdown from "./Components/SizeDropdown"
 // När puzzlet är löst skall detta visas för användaren
 // kontrollera så inte puzzlet är löst direkt
 
+// style på shuffle knapp
+// style och position på storleksval
+
 
 export default function App(){
-    const [rows,setRows] = useState(2)
-    const [columns,setColumns] = useState(2)
+    const [rows,setRows] = useState(4)
+    const [columns,setColumns] = useState(4)
 
     const handleChange = ((e)=>{
-        if(e.target.id==="rows")
+        if(e.target.id==="rowsandcolumns"){
             setRows(parseInt(e.target.value))
-        else if(e.target.id==="columns")
             setColumns(parseInt(e.target.value))
+        }
     })
 
     return(
         <div>
-            <SizeDropdown id={"rows"} default={rows} handleChange={handleChange}/>
-            <SizeDropdown id={"columns"} default={columns} handleChange={handleChange}/>
             <Game rows={rows} columns={columns} />
+            <SizeDropdown id={"rowsandcolumns"} default={rows} handleChange={handleChange}/>
         </div>
     )
 }

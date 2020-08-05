@@ -34,6 +34,7 @@ export default function Game(props){
             }
         }while(checkOrder(shuffleBricks))
         setGameOver(false)
+        setMoveBrickTo({id: -1, direction: null})
         return shuffleBricks
     }
 
