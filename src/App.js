@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import Game from "./Components/Game"
-import SizeDropdown from "./Components/SizeDropdown"
+import BoardSizePicker from "./Components/BoardSizePicker"
 
 // Skapa spelbräde 4x4 skall kodas in i variabler
 // lägg till block ( 4x4-1 )
@@ -11,25 +11,19 @@ import SizeDropdown from "./Components/SizeDropdown"
 // När puzzlet är löst skall detta visas för användaren
 // kontrollera så inte puzzlet är löst direkt
 
-// style på shuffle knapp
-// style och position på storleksval
-
-
 export default function App(){
-    const [rows,setRows] = useState(4)
-    const [columns,setColumns] = useState(4)
+    const [rows,setRows] = useState(5)
+    const [columns,setColumns] = useState(3)
 
-    const handleChange = ((e)=>{
-        if(e.target.id==="rowsandcolumns"){
-            setRows(parseInt(e.target.value))
-            setColumns(parseInt(e.target.value))
-        }
+    const setBoardSize = ((e)=>{
+        setRows(parseInt(e.target.value))
+        setColumns(parseInt(e.target.value))
     })
 
     return(
         <div>
             <Game rows={rows} columns={columns} />
-            <SizeDropdown id={"rowsandcolumns"} default={rows} handleChange={handleChange}/>
+            <BoardSizePicker id={"rowsandcolumns"} default={rows} setBoardSize={setBoardSize}/>
         </div>
     )
 }

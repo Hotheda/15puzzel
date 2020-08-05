@@ -1,29 +1,19 @@
 import React from "react"
 
 export default function Brick(props){
-    if(props.shuffle){
-        return(
-            <div onClick={(event)=>props.handleClick(props.brick_number)} className = {"shuffle_bricks"}>
-                <p>{props.brick_number}</p>
-            </div>
-        )
-    }
-    if(props.brick_number===props.moveBrickTo.id){
-        return(
-            <div onClick={(event)=>props.handleClick(props.brick_number)} className = {"brick " + props.moveBrickTo.direction}>
-                <p>{props.brick_number}</p>
-            </div>
-        )
+    var className = "no_brick"
+
+    if(props.shuffle && props.brick_number!==0){
+        className = "brick shuffle_brick"
+    }else if(props.brick_number===props.brickToMove.id){
+        className = "brick " + props.brickToMove.direction
     }else if(props.brick_number>0){
-        return(
-            <div onClick={(event)=>props.handleClick(props.brick_number)} className = {"brick"}>
-                <p>{props.brick_number}</p>
-            </div>
-        )
-    }else{
-        return(
-            <div className = "no_brick">
-            </div>
-        )
+        className = "brick"
     }
+
+    return(
+        <div onClick={(event)=>props.onBrickClick(props.brick_number)} className = {className}>
+            <p>{props.brick_number}</p>
+        </div>
+    )    
 }

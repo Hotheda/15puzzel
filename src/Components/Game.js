@@ -1,64 +1,61 @@
 import React, { useEffect, useState } from "react"
 import Board from "./Board";
 import Brick from "./Brick";
-import ShuffleBrick from "./ShuffleBrick"
 import ShuffleButton from "./ShuffleButton"
 import Winner from "./Winner"
 
 export default function Game(props){
     const {columns, rows} = props;
     const [gameOver, setGameOver] = useState(false)
-    const [shuffleing, setShuffleing] = useState(false)
+    const [onShuffle, setOnShuffle] = useState(false)
     const [bricks, setBricks] = useState([]);
-    const [moveBrickTo, setMoveBrickTo] = useState({
+    const [brickToMove, setBrickToMove] = useState({
         id: -1,
         direction: null
     })
 
 
     useEffect(() =>{
-        var createBricks = []
+        var bricks = []
         for(var i=0;i<(columns*rows);i++){
-            createBricks.push(i);
+            bricks.push(i);
         }
-        createBricks = shuffle(createBricks)
-        setBricks(createBricks)
+        const shuffledBricks = shuffle(bricks)
+        setBricks(shuffledBricks)
     }, [columns,rows])
 
     const shuffle = (bricks)=>{
         var shuffleBricks = [...bricks]
         do{
             for(var i=0;i<30;i++){
-                var brickToMove=Math.floor(Math.random()*shuffleBricks.length-1)
-                shuffleBricks.splice(brickToMove,0,shuffleBricks[shuffleBricks.length-1])
+                var brickToMoveShuffle=Math.floor(Math.random()*shuffleBricks.length-1)
+                shuffleBricks.splice(brickToMoveShuffle,0,shuffleBricks[shuffleBricks.length-1])
                 shuffleBricks.pop()
             }
         }while(checkOrder(shuffleBricks))
         setGameOver(false)
-        setMoveBrickTo({id: -1, direction: null})
+        setBrickToMove({id: -1, direction: null})
         return shuffleBricks
     }
 
-    const handleClick = ((num)=>{
+    const onBrickClick = ((num)=>{
         const id = bricks.findIndex(element=>element===num)
         const idOfEmpty = bricks.findIndex(element=>element===0)
 
-        var direction = checkIfNeghborIsEmpty(id,idOfEmpty)
+        var direction = checkIfNeighboursIsEmpty(id,idOfEmpty)
         if(direction){
             moveBrick(id,idOfEmpty,direction)
         }
     })
 
-    const checkIfNeghborIsEmpty = ((id, idOfEmpty)=>{
-
-        
-        if( (id-1) === idOfEmpty && id%rows) {
+    const checkIfNeighboursIsEmpty = ((id, idOfEmpty)=>{        
+        if( (id-1) === idOfEmpty && id%columns) {
             return "move_left";
-        }else if( (id+1) === idOfEmpty && (id+1)%rows){
+        }else if( (id+1) === idOfEmpty && (id+1)%columns){
             return "move_right";
-        }else if( (id-rows) === idOfEmpty){
+        }else if( (id-columns) === idOfEmpty){
             return "move_up";
-        }else if( (id+rows) === idOfEmpty){
+        }else if( (id+columns) === idOfEmpty){
             return "move_down";
         }else{
             return false;
@@ -71,7 +68,7 @@ export default function Game(props){
         bricksMoved[id] = 0
         setBricks(bricksMoved)
         checkOrder(bricksMoved)
-        setMoveBrickTo({id: bricksMoved[idOfEmpty], direction: direction})
+        setBrickToMove({id: bricksMoved[idOfEmpty], direction: direction})
     })
 
     const checkOrder = ((bricksMoved)=>{
@@ -84,26 +81,18 @@ export default function Game(props){
         return true;
     })
 
-    var bricksToShow
-    if(shuffleing){
-        bricksToShow = bricks.map((num)=>{return(
-            <ShuffleBrick key={num} brick_number={num} shuffle={false} moveBrickTo={moveBrickTo} handleClick={handleClick}/>
-        )})
-    }else{
-        bricksToShow = bricks.map((num)=>{return(
-                <Brick key={num} brick_number={num} shuffle={false} moveBrickTo={moveBrickTo} handleClick={handleClick}/>
+    const bricksToShow = bricks.map((num)=>{return(
+                <Brick key={num} brick_number={num} shuffle={onShuffle} brickToMove={brickToMove} onBrickClick={onBrickClick}/>
             )})
-    }
-
 
     const shuffleBricks = (()=>{
-        setShuffleing(true)
+        setOnShuffle(true)
         setBricks(shuffle(bricks))
     })
 
-    if(shuffleing){
+    if(onShuffle){
         setTimeout(()=>{
-            setShuffleing((false))
+            setOnShuffle((false))
         },500)
     }
 

@@ -6,26 +6,26 @@ export default function Board(props){
     const printBoard = (()=>{
         const numberOfBricks = props.bricks.length
 
-        var columnsContent = []
+        var boardContent = []
 
-        for(var i=0;i<numberOfBricks-1;i+=props.rows){
+        for(var rowStartIndex = 0; rowStartIndex<numberOfBricks - 1; rowStartIndex += props.columns){
             var rowsContent = [];
-            for(var j=0; j<props.rows; j++){
-                var brickNum = i+j
+            for(var columnIndex = 0; columnIndex < props.columns; columnIndex++){
+                var brickNum = rowStartIndex+columnIndex
                 rowsContent.push(props.bricks[brickNum])
             }
-            columnsContent.push(rowsContent)
+            boardContent.push(rowsContent)
         }
-        columnsContent = columnsContent.map((items)=>{
+        const board = boardContent.map((row)=>{
             return(
-                <div key={items[0].key} className="board_row">
-                    {items}
+                <div key={row[0].key} className="board_row">
+                    {row}
                 </div>
             )
         })
 
         return(
-            columnsContent
+            board
         )
     })
 
