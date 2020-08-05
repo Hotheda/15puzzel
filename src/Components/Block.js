@@ -1,6 +1,13 @@
 import React from "react"
 
 export default function Block(props){
+    if(props.shuffle){
+        return(
+            <div onClick={(event)=>props.handleClick(props.brick_number)} className = {"shuffle_bricks"}>
+                <p>{props.brick_number}</p>
+            </div>
+        )
+    }
     if(props.brick_number===props.moveBrickTo.id){
         return(
             <div onClick={(event)=>props.handleClick(props.brick_number)} className = {props.moveBrickTo.direction}>
@@ -9,7 +16,7 @@ export default function Block(props){
         )
     }else if(props.brick_number>0){
         return(
-            <div onClick={(event)=>props.handleClick(props.brick_number)} className = "brick">
+            <div onClick={(event)=>props.handleClick(props.brick_number)} className = {"brick"}>
                 <p>{props.brick_number}</p>
             </div>
         )

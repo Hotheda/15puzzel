@@ -23,8 +23,6 @@ export default function App(){
             setColumns(parseInt(e.target.value))
     })
 
-    console.log(rows, columns)
-
     return(
         <div>
             <SizeDropdown id={"rows"} default={rows} handleChange={handleChange}/>

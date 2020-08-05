@@ -22,7 +22,18 @@
 .board_row{
     display: table-row;
 }
-.brick,.move_left,.move_right,.move_up,.move_down{
+
+.shuffle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1%;
+}
+
+.no_brick{
+    display: table-cell;
+}
+.brick,.move_left,.move_right,.move_up,.move_down,.shuffle_bricks{
     display: table-cell;
     text-align: center;
     vertical-align: middle;
@@ -33,10 +44,6 @@
     font-size: 6vmin;
     background-color: blanchedalmond;
 }
-.no_brick{
-    display: table-cell;
-}
-
 .move_left{
     animation: animation_left 0.3s ease-out;
 }
@@ -65,4 +72,21 @@
 @keyframes animation_down{
     from {transform: translateY(-100%);}
     to {transform: translateX(0%);}
+}
+
+.shuffle_bricks{
+    animation: animation_shuffle 0.5s ease-in-out 5;
+}
+@keyframes animation_shuffle{
+    0%{transform: translateX(0%);}
+    10%{transform: translateX(100%);}
+    20%{transform: translateY(100%);}
+    30%{transform: translateX(0%);}
+    40%{transform: translateY(0%);}
+    50%{transform: translateX(-100%);}
+    60%{transform: translateY(-100%);}
+    70%{transform: translateX(0%);}
+    80%{transform: translateY(0%);}
+    90%{transform: translateX(100%);}
+    100%{transform: translateX(100%);}
 }

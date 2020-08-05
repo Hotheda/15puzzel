@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react"
 import Board from "./Board";
 import Block from "./Block";
+import Shuffle from "./Shuffle"
+import Winner from "./Winner"
 
 export default function Game(props){
     const {columns, rows} = props;
+    const [gameOver, setGameOver] = useState(false)
+    const [shuffleing, setShuffleing] = useState(false)
     const [bricks, setBricks] = useState([]);
     const [moveBrickTo, setMoveBrickTo] = useState({
         id: -1,
@@ -20,13 +24,16 @@ export default function Game(props){
         setBricks(createBricks)
     }, [columns,rows])
 
-    const shuffle = (shuffleBricks)=>{
-        for(var i=0;i<30;i++){
-            var brickToMove=Math.floor(Math.random()*shuffleBricks.length-1)
-            shuffleBricks.splice(brickToMove,0,shuffleBricks[shuffleBricks.length-1])
-            shuffleBricks.pop()
-        }
-        // kolla upp så att den inte redan är löst
+    const shuffle = (bricks)=>{
+        var shuffleBricks = [...bricks]
+        do{
+            for(var i=0;i<30;i++){
+                var brickToMove=Math.floor(Math.random()*shuffleBricks.length-1)
+                shuffleBricks.splice(brickToMove,0,shuffleBricks[shuffleBricks.length-1])
+                shuffleBricks.pop()
+            }
+        }while(checkOrder(shuffleBricks))
+        setGameOver(false)
         return shuffleBricks
     }
 
@@ -71,18 +78,34 @@ export default function Game(props){
                 return false;
             }
         }
-        console.log("Du vann")
+        setGameOver(true)
         return true;
     })
 
-    var bricksToShow = bricks.map((num)=>{return(
-        <Block key={num} brick_number={num} moveBrickTo={moveBrickTo} handleClick={handleClick}/>
-    )})
 
-    return(
-        <div>
-            <h1 style = {{textAlign: "center", margin: "25px"}} >Here is the board {columns} x {rows}</h1>
-            <Board bricks={bricksToShow} rows={rows} columns={columns} handleClick={handleClick}/>
-        </div>
-    )
+    var bricksToShow = bricks.map((num)=>{return(
+            <Block key={num} brick_number={num} shuffle={false} moveBrickTo={moveBrickTo} handleClick={handleClick}/>
+        )})
+
+
+    const shuffleBricks = (()=>{
+        setShuffleing(true)
+        setBricks(shuffle(bricks))
+    })
+
+    if(gameOver){
+        return(
+            <div>
+                <Winner />
+                <Shuffle />
+            </div>
+        )
+    }else{
+        return(
+            <div>
+                <Board bricks={bricksToShow} rows={rows} columns={columns} handleClick={handleClick}/>
+                <Shuffle shuffleBricks={shuffleBricks}/>
+            </div>
+        )
+    }
 }
