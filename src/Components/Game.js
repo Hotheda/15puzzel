@@ -6,6 +6,7 @@ import Winner from "./Winner"
 
 export default function Game(props){
     const {columns, rows} = props;
+    const [numberOfMoves, setNumberOfMoves] = useState(0)
     const [gameOver, setGameOver] = useState(false)
     const [onShuffle, setOnShuffle] = useState(false)
     const [bricks, setBricks] = useState([]);
@@ -34,6 +35,7 @@ export default function Game(props){
             }
         }while(checkOrder(shuffleBricks))
         setGameOver(false)
+        setNumberOfMoves(0)
         setBrickToMove({id: -1, direction: null})
         return shuffleBricks
     }
@@ -69,6 +71,7 @@ export default function Game(props){
         setBricks(bricksMoved)
         checkOrder(bricksMoved)
         setBrickToMove({id: bricksMoved[idOfEmpty], direction: direction})
+        setNumberOfMoves(numberOfMoves+1)
     })
 
     const checkOrder = ((bricksMoved)=>{
@@ -99,7 +102,7 @@ export default function Game(props){
     return(
         <div>
             <Board bricks={bricksToShow} rows={rows} columns={columns}/>
-            {gameOver ? <Winner/> : null}
+            {gameOver ? <Winner numberOfMoves={numberOfMoves}/> : null}
             <ShuffleButton shuffleBricks={shuffleBricks}/>
         </div>
     )

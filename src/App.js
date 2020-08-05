@@ -12,8 +12,8 @@ import BoardSizePicker from "./Components/BoardSizePicker"
 // kontrollera så inte puzzlet är löst direkt
 
 export default function App(){
-    const [rows,setRows] = useState(5)
-    const [columns,setColumns] = useState(3)
+    const [rows,setRows] = useState(4)
+    const [columns,setColumns] = useState(4)
 
     const setBoardSize = ((e)=>{
         setRows(parseInt(e.target.value))
