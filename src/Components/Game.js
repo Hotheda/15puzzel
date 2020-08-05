@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import Board from "./Board";
-import ShuffleBoard from "./ShuffleBoard"
-import Block from "./Block";
+import Brick from "./Brick";
+import ShuffleBrick from "./ShuffleBrick"
 import ShuffleButton from "./ShuffleButton"
 import Winner from "./Winner"
 
@@ -84,22 +84,34 @@ export default function Game(props){
         return true;
     })
 
-
-    var bricksToShow = bricks.map((num)=>{return(
-            <Block key={num} brick_number={num} shuffle={false} moveBrickTo={moveBrickTo} handleClick={handleClick}/>
+    var bricksToShow
+    if(shuffleing){
+        bricksToShow = bricks.map((num)=>{return(
+            <ShuffleBrick key={num} brick_number={num} shuffle={false} moveBrickTo={moveBrickTo} handleClick={handleClick}/>
         )})
+    }else{
+        bricksToShow = bricks.map((num)=>{return(
+                <Brick key={num} brick_number={num} shuffle={false} moveBrickTo={moveBrickTo} handleClick={handleClick}/>
+            )})
+    }
 
 
     const shuffleBricks = (()=>{
         setShuffleing(true)
+        console.log("Begin shuffle")
         setBricks(shuffle(bricks))
     })
 
+    if(shuffleing){
+        setTimeout(()=>{
+            setShuffleing((false))
+            console.log("End shuffle")
+        },500)
+    }
+
     return(
         <div>
-            {shuffleing ? 
-                <Board bricks={bricksToShow} rows={rows} columns={columns}/> :
-                <ShuffleBoard bricks={bricksToShow} rows={rows} columns={columns}/>}
+            <Board bricks={bricksToShow} rows={rows} columns={columns}/>
             {gameOver ? <Winner/> : null}
             <ShuffleButton shuffleBricks={shuffleBricks}/>
         </div>

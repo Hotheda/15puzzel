@@ -1,6 +1,6 @@
 import React from "react"
 
-export default function Block(props){
+export default function Brick(props){
     if(props.shuffle){
         return(
             <div onClick={(event)=>props.handleClick(props.brick_number)} className = {"shuffle_bricks"}>
