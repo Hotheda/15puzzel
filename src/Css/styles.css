@@ -5,22 +5,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
 
 *, *::after, *::before{
-    padding: 0;
-    margin: 0;
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
 }
+body{
+    background-color: rgba(0, 0, 0, 0.89);
+    padding: 0;
+    margin: 0;
+}
+
 *:focus{
     outline: none;
 }
 .board{
     border: 3px solid red;
     background-color: burlywood;
-    width: 70vmin;
-    height: 70vmin;
-    margin: 0 auto;
+    width: 60vmin;
+    height: 60vmin;
+    margin: 1vmin auto;
     display: table;
     table-layout: fixed;
+    border-radius: 1vmin;
 }
 .board_row{
     display: table-row;
@@ -28,6 +33,10 @@
 .size_input_div{
     margin: 0 auto;
     width: fit-content;
+    color: wheat;
+}
+.size_input_div label{
+    font-size: 3vmin;
 }
 .size_input{
     font-size: 3vmin;
@@ -43,10 +52,15 @@
 .shuffle_btn{
     font-size: 2vmin;
     font-weight: 900;
-    padding: 3vmin;
-    border-radius: 50%;
-    color: aliceblue;
-    background-image: linear-gradient(blue,green);
+    padding: 2vmin;
+    border-radius: 1vmin;
+    background-color: rgba(0, 0, 0, 0);
+    color: wheat;
+    border: 2px solid darkgoldenrod;
+    transition: background-color 0.5s ease-in;
+}
+.shuffle_btn:hover{
+    background-color: darkgoldenrod;
 }
 
 .winner_text{
@@ -56,15 +70,16 @@
     background-color: black;
     color: azure;
     opacity: 0.7;
-    width: 70vmin;
-    height: 70vmin;
+    width: 61vmin;
+    height: 61vmin;
     z-index: 100;
     position: absolute;
     margin: 0 auto;
     transform: translateY(-100%) scale(1);
-    left: calc(50% - 35vmin);
+    left: calc(50% - 30vmin);
     font-size: calc(1vw + 1vh + 1vmin );
     animation: winner_animation 1s;
+    border-radius: 1vmin;
 }
 @keyframes winner_animation{
     from {transform: translateY(-100%) scale(0);}
@@ -74,17 +89,31 @@
 .no_brick{
     display: table-cell;
 }
-.brick,.move_left,.move_right,.move_up,.move_down,.shuffle_bricks{
+/*.brick,.move_left,.move_right,.move_up,.move_down,.shuffle_bricks{*/
+.brick{
     display: table-cell;
     text-align: center;
     vertical-align: middle;
-    border: 1px solid black;
-    min-width: 5vmin;
-    min-height: 5vmin;
+    border: 1px solid rgba(0, 0, 0, 0.5);
     font-weight: 800;
-    font-size: 6vmin;
-    background-color: blanchedalmond;
+    font-size: max(3vmin);
+    background-image: linear-gradient(blanchedalmond,rgb(235, 216, 187));
+    position: relative;
+    border-radius: 1vmin;
+    box-shadow: 2px 2px black;
 }
+.brick:after{
+    position: absolute;
+    content: "";
+    top: 1vmin;
+    bottom: 1vmin;
+    left: 1vmin;
+    right: 1vmin;
+    /*background-image: linear-gradient(blanchedalmond,rgb(235, 216, 187));*/
+    border-right: .2vmin solid rgb(235, 216, 187);
+    border-top: .2vmin solid rgb(235, 216, 187);
+}
+
 .move_left{
     animation: animation_left 0.3s ease-out;
 }

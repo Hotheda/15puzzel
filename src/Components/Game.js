@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import Board from "./Board";
+import ShuffleBoard from "./ShuffleBoard"
 import Block from "./Block";
 import ShuffleButton from "./ShuffleButton"
 import Winner from "./Winner"
@@ -96,7 +97,9 @@ export default function Game(props){
 
     return(
         <div>
-            <Board bricks={bricksToShow} rows={rows} columns={columns} handleClick={handleClick}/>
+            {shuffleing ? 
+                <Board bricks={bricksToShow} rows={rows} columns={columns}/> :
+                <ShuffleBoard bricks={bricksToShow} rows={rows} columns={columns}/>}
             {gameOver ? <Winner/> : null}
             <ShuffleButton shuffleBricks={shuffleBricks}/>
         </div>
