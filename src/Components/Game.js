@@ -98,14 +98,12 @@ export default function Game(props){
 
     const shuffleBricks = (()=>{
         setShuffleing(true)
-        console.log("Begin shuffle")
         setBricks(shuffle(bricks))
     })
 
     if(shuffleing){
         setTimeout(()=>{
             setShuffleing((false))
-            console.log("End shuffle")
         },500)
     }
 

@@ -145,10 +145,14 @@ body{
 }
 
 .shuffle_brick{
-    animation: animation_shuffle 0.5s ease-in-out 5;
+    transform-style: preserve-3d;
+    animation: animation_shuffle 0.5s ease-in-out;
 }
 @keyframes animation_shuffle{
-    0%{transform: scale(1);}
-    50%{transform: scale(0);}
-    100%{transform: scale(1);}
+    
+    0%{transform: rotateY(0deg) rotateZ(0deg);}
+    15%{color: rgba(0, 0, 0, 0);}
+    50%{transform: rotateY(60deg) rotateZ(60deg) scale(0);}
+    98%{transform: rotateY(0deg) rotateZ(0deg);}
+    99%{color: black;}
 }
