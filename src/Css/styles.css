@@ -90,8 +90,9 @@ body{
 .no_brick{
     display: table-cell;
     color: rgba(0, 0, 0, 0);
+    font-size: max(3vmin);
 }
-/*.brick,.move_left,.move_right,.move_up,.move_down,.shuffle_bricks{*/
+
 .brick{
     display: table-cell;
     text-align: center;
