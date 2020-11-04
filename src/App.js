@@ -21,7 +21,7 @@ export default function App(){
     })
 
     return(
-        <div>
+        <div className = "main_div">
             <Game rows={rows} columns={columns} />
             <BoardSizePicker id={"rowsandcolumns"} default={rows} setBoardSize={setBoardSize}/>
         </div>
