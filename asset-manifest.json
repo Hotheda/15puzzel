@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/15puzzel/static/css/main.1ba3abf4.chunk.css",
+    "main.css": "/15puzzel/static/css/main.d04b5f20.chunk.css",
     "main.js": "/15puzzel/static/js/main.a98d4f73.chunk.js",
     "main.js.map": "/15puzzel/static/js/main.a98d4f73.chunk.js.map",
     "runtime-main.js": "/15puzzel/static/js/runtime-main.aae5ccd7.js",
@@ -8,16 +8,16 @@
     "static/js/2.3b1925df.chunk.js": "/15puzzel/static/js/2.3b1925df.chunk.js",
     "static/js/2.3b1925df.chunk.js.map": "/15puzzel/static/js/2.3b1925df.chunk.js.map",
     "index.html": "/15puzzel/index.html",
-    "precache-manifest.bc7e196decd6ea2d8c1747f8b70c299a.js": "/15puzzel/precache-manifest.bc7e196decd6ea2d8c1747f8b70c299a.js",
+    "precache-manifest.045942dd0d671c67ad0e212456e9390d.js": "/15puzzel/precache-manifest.045942dd0d671c67ad0e212456e9390d.js",
     "service-worker.js": "/15puzzel/service-worker.js",
-    "static/css/main.1ba3abf4.chunk.css.map": "/15puzzel/static/css/main.1ba3abf4.chunk.css.map",
+    "static/css/main.d04b5f20.chunk.css.map": "/15puzzel/static/css/main.d04b5f20.chunk.css.map",
     "static/js/2.3b1925df.chunk.js.LICENSE.txt": "/15puzzel/static/js/2.3b1925df.chunk.js.LICENSE.txt",
     "static/media/styles.css": "/15puzzel/static/media/wood_block.13520c6a.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.aae5ccd7.js",
     "static/js/2.3b1925df.chunk.js",
-    "static/css/main.1ba3abf4.chunk.css",
+    "static/css/main.d04b5f20.chunk.css",
     "static/js/main.a98d4f73.chunk.js"
   ]
 }
