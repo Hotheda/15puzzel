@@ -20,14 +20,19 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../Media/water.jpg");
 }
 
 *:focus{
     outline: none;
 }
 .board{
-    border: 3px solid red;
+    border-color: rgba(0, 0, 0, 0.5);
+    border-width: 1vmin;
+    border-style: solid;
     background-color: burlywood;
+    background-image: linear-gradient(rgba(17, 17, 17, 0.5), rgba(153, 153, 153, 0.5)), url("../Media/wood_block.jpg");
+    background-size: cover;
     width: 60vmin;
     height: 60vmin;
     margin: 1vmin auto;
@@ -65,16 +70,18 @@ body{
     background-color: rgba(0, 0, 0, 0);
     color: wheat;
     border: 2px solid darkgoldenrod;
-    transition: background-color 0.5s ease-in;
+    transition: all .5s ease-in-out;
 }
 .shuffle_btn:hover{
     background-color: darkgoldenrod;
+    color: #111;
 }
 
 .winner_text{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    text-align: center;
     align-items: center;
     background-color: black;
     color: azure;
@@ -108,21 +115,10 @@ body{
     border: 1px solid rgba(0, 0, 0, 0.5);
     font-weight: 800;
     font-size: max(3vmin);
-    background-image: linear-gradient(blanchedalmond,rgb(235, 216, 187));
+    background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.1), rgba(51, 51, 51, 0.2)), url("../Media/wood_block.jpg");
     position: relative;
     border-radius: 1vmin;
     box-shadow: 2px 2px black;
-}
-.brick:after{
-    position: absolute;
-    content: "";
-    top: 1vmin;
-    bottom: 1vmin;
-    left: 1vmin;
-    right: 1vmin;
-    /*background-image: linear-gradient(blanchedalmond,rgb(235, 216, 187));*/
-    border-right: .2vmin solid rgb(235, 216, 187);
-    border-top: .2vmin solid rgb(235, 216, 187);
 }
 
 .move_left{
@@ -166,4 +162,16 @@ body{
     50%{transform: rotateY(60deg) rotateZ(60deg) scale(0);}
     98%{transform: rotateY(0deg) rotateZ(0deg);}
     99%{color: black;}
+}
+
+@media only screen and (max-width: 600px){
+    .board{
+        width: 90vmin;
+        height: 90vmin;
+    }
+    .winner_text{
+        width: 91vmin;
+        height: 91vmin;
+        left: calc(50% - 45vmin);
+    }
 }
