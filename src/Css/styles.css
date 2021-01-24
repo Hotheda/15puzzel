@@ -2,14 +2,15 @@
 /* Responsiv mobil, surfplatta m.m. */
 /* Animation vid slumpning av brickor */
 
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@900&display=swap');
 
 *, *::after, *::before{
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
 }
 body{
-    /*background-color: rgba(0, 0, 0, 0.89);*/
+    background-color: rgba(0, 0, 0, 0.89);
     padding: 0;
     margin: 0;
 }
@@ -25,10 +26,7 @@ body{
 *:focus{
     outline: none;
 }
-.board{    
-    /*border-image: linear-gradient(rgba(1, 1, 1, 1), rgba(1, 1, 1, 1)), url("../Media/wood_block.jpg");
-    border-width: 1vmin;
-    border-style: solid;*/
+.board{
     background-color: burlywood;
     background-image: linear-gradient(rgba(17, 17, 17, 0.5), rgba(153, 153, 153, 0.5)), url("../Media/wood_block.jpg");
     background-size: cover;
@@ -114,12 +112,18 @@ body{
     text-align: center;
     vertical-align: middle;
     border: 1px solid rgba(0, 0, 0, 0.5);
-    font-weight: 800;
-    font-size: max(3vmin);
     background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.1), rgba(51, 51, 51, 0.2)), url("../Media/wood_block.jpg");
     position: relative;
     border-radius: 1vmin;
-    box-shadow: 2px 2px black;
+    box-shadow: -.3vmin .3vmin .3vmin -.3vmin inset rgba(0, 0, 0, 1), .5vmin -.5vmin .5vmin -.5vmin inset rgba(0, 0, 0, 1);
+}
+.brick p{
+    font-size: max(3vmin);
+    font-weight: 900;
+    background-color: #111;
+    color: transparent;
+    text-shadow: 0vmin .2vmin .5vmin rgba(255, 255, 255, 0.3);
+    background-clip: text;
 }
 
 .move_left{
@@ -178,7 +182,7 @@ body{
 }
 @media only screen and (min-width: 600px){
     .main_div{
-        background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../Media/water.jpg");
+        background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../Media/frozenlake.jpg");
         background-size: cover;
         transform:scale(1);
         animation: water 10s infinite;
