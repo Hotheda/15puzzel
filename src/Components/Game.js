@@ -48,6 +48,10 @@ export default function Game(props){
         if(direction){
             moveBrick(id,idOfEmpty,direction)
         }
+        //Get more than one brick to move, move the whole line of bricks
+        else{
+            
+        }
     })
 
     const checkIfNeighboursIsEmpty = ((id, idOfEmpty)=>{        
