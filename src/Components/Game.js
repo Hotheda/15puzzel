@@ -50,7 +50,18 @@ export default function Game(props){
         }
         //Get more than one brick to move, move the whole line of bricks
         else{
-            
+            if(id<idOfEmpty){
+                if(id >= parseInt(idOfEmpty/columns) * rows){
+                    console.log("Samma rad")
+                }
+            }else if(id>idOfEmpty){
+                if(id <= parseInt(idOfEmpty/columns) * (rows)  + rows ){
+                    console.log("Samma rad")
+                }
+            }
+            if(id%columns == idOfEmpty%columns){
+                console.log("Samma column")
+            }
         }
     })
 
