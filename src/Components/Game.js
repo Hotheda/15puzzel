@@ -52,15 +52,16 @@ export default function Game(props){
         else{
             if(id<idOfEmpty){
                 if(id >= parseInt(idOfEmpty/columns) * rows){
-                    console.log("Samma rad")
+                    console.log("Samma rad ner")
+                }else if(id%columns == idOfEmpty%columns){
+                    console.log("Samma column ner")
                 }
             }else if(id>idOfEmpty){
                 if(id <= parseInt(idOfEmpty/columns) * (rows)  + rows ){
-                    console.log("Samma rad")
+                    console.log("Samma rad upp")
+                }else if(id%columns == idOfEmpty%columns){
+                    console.log("Samma column upp")
                 }
-            }
-            if(id%columns == idOfEmpty%columns){
-                console.log("Samma column")
             }
         }
     })
