@@ -50,21 +50,32 @@ export default function Game(props){
         }
         //Get more than one brick to move, move the whole line of bricks
         else{
-            if(id<idOfEmpty){
-                if(id >= parseInt(idOfEmpty/columns) * rows){
-                    console.log("Samma rad ner")
-                }else if(id%columns == idOfEmpty%columns){
-                    console.log("Samma column ner")
-                }
-            }else if(id>idOfEmpty){
-                if(id <= parseInt(idOfEmpty/columns) * (rows)  + rows ){
-                    console.log("Samma rad upp")
-                }else if(id%columns == idOfEmpty%columns){
-                    console.log("Samma column upp")
-                }
+            direction = chechIfLineIsEmpty(id, idOfEmpty)
+            if(direction){
+                moveBricks(id,idOfEmpty,direction)
             }
         }
     })
+
+    const chechIfLineIsEmpty = (id, idOfEmpty) => {
+        if(id<idOfEmpty){
+            if(id >= parseInt(idOfEmpty/columns) * rows){
+                console.log("Samma rad ner")
+                return "move_right";
+            }else if(id%columns === idOfEmpty%columns){
+                console.log("Samma column ner")
+                return "move_down";
+            }
+        }else if(id>idOfEmpty){
+            if(id <= parseInt(idOfEmpty/columns) * (rows)  + rows ){
+                console.log("Samma rad upp")
+                return "move_left";
+            }else if(id%columns === idOfEmpty%columns){
+                console.log("Samma column upp")
+                return "move_up";
+            }
+        }
+    }
 
     const checkIfNeighboursIsEmpty = ((id, idOfEmpty)=>{        
         if( (id-1) === idOfEmpty && id%columns) {
@@ -89,6 +100,23 @@ export default function Game(props){
         setBrickToMove({id: bricksMoved[idOfEmpty], direction: direction})
         setNumberOfMoves(numberOfMoves+1)
     })
+
+    const moveBricks = ((id,idOfEmpty,direction)=>{
+        var bricksMoved = [...bricks]
+        while(id !== idOfEmpty){
+            var lastId = idOfEmpty + 1;
+            var bricktemp = bricksMoved[lastId]
+            bricksMoved[lastId] = bricksMoved[id]
+            bricksMoved[id] = bricktemp
+            console.log(bricksMoved[lastId],bricksMoved[id])
+            setBrickToMove({id: bricksMoved[lastId], direction: direction})
+            setBricks(bricksMoved)
+            id = lastId;
+        }
+        checkOrder(bricksMoved)
+        setNumberOfMoves(numberOfMoves+1)
+    })
+
 
     const checkOrder = ((bricksMoved)=>{
         for(var i=0;i<bricksMoved.length-1;i++){
