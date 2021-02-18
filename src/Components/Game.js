@@ -10,8 +10,6 @@ const _moveDown = "move_up";
 const _moveUp = "move_down";
 
 export default function Game(props){
-    console.log("rerender")
-
     const {columns, rows} = props;
     const [numberOfMoves, setNumberOfMoves] = useState(0)
     const [gameOver, setGameOver] = useState(false)
@@ -68,18 +66,14 @@ export default function Game(props){
     const checkIfLineIsEmpty = (id, idOfEmpty) => {
         if(id<idOfEmpty){
             if(id >= parseInt(idOfEmpty/columns) * rows){
-                console.log("Samma rad ner")
                 return _moveRight;
             }else if(id%columns === idOfEmpty%columns){
-                console.log("Samma column ner")
                 return _moveDown;
             }
         }else if(id>idOfEmpty){
             if(id <= parseInt(idOfEmpty/columns) * (rows)  + rows ){
-                console.log("Samma rad upp")
                 return _moveLeft;
             }else if(id%columns === idOfEmpty%columns){
-                console.log("Samma column upp")
                 return _moveUp;
             }
         }
@@ -156,7 +150,6 @@ export default function Game(props){
                 }
             break;
         }
-        console.log("Save all")
         setBricks(bricksMoved)
         checkOrder(bricksMoved)
         setNumberOfMoves(numberOfMoves+1)
