@@ -4,7 +4,14 @@ import Brick from "./Brick";
 import ShuffleButton from "./ShuffleButton"
 import Winner from "./Winner"
 
+const _moveRight = "move_right";
+const _moveLeft = "move_left";
+const _moveDown = "move_up";
+const _moveUp = "move_down";
+
 export default function Game(props){
+    console.log("rerender")
+
     const {columns, rows} = props;
     const [numberOfMoves, setNumberOfMoves] = useState(0)
     const [gameOver, setGameOver] = useState(false)
@@ -51,42 +58,42 @@ export default function Game(props){
         }
         //Get more than one brick to move, move the whole line of bricks
         else if(moveLine){
-            direction = chechIfLineIsEmpty(id, idOfEmpty)
+            direction = checkIfLineIsEmpty(id, idOfEmpty)
             if(direction){
                 moveBricks(id,idOfEmpty,direction)
             }
         }
     })
 
-    const chechIfLineIsEmpty = (id, idOfEmpty) => {
+    const checkIfLineIsEmpty = (id, idOfEmpty) => {
         if(id<idOfEmpty){
             if(id >= parseInt(idOfEmpty/columns) * rows){
                 console.log("Samma rad ner")
-                return "move_right";
+                return _moveRight;
             }else if(id%columns === idOfEmpty%columns){
                 console.log("Samma column ner")
-                return "move_down";
+                return _moveDown;
             }
         }else if(id>idOfEmpty){
             if(id <= parseInt(idOfEmpty/columns) * (rows)  + rows ){
                 console.log("Samma rad upp")
-                return "move_left";
+                return _moveLeft;
             }else if(id%columns === idOfEmpty%columns){
                 console.log("Samma column upp")
-                return "move_up";
+                return _moveUp;
             }
         }
     }
 
     const checkIfNeighboursIsEmpty = ((id, idOfEmpty)=>{        
         if( (id-1) === idOfEmpty && id%columns) {
-            return "move_left";
+            return _moveLeft;
         }else if( (id+1) === idOfEmpty && (id+1)%columns){
-            return "move_right";
+            return _moveRight;
         }else if( (id-columns) === idOfEmpty){
-            return "move_up";
+            return _moveDown;
         }else if( (id+columns) === idOfEmpty){
-            return "move_down";
+            return _moveUp;
         }else{
             return false;
         }
@@ -104,16 +111,53 @@ export default function Game(props){
 
     const moveBricks = ((id,idOfEmpty,direction)=>{
         var bricksMoved = [...bricks]
-        while(id !== idOfEmpty){
-            var lastId = idOfEmpty + 1;
-            var bricktemp = bricksMoved[lastId]
-            bricksMoved[lastId] = bricksMoved[id]
-            bricksMoved[id] = bricktemp
-            console.log(bricksMoved[lastId],bricksMoved[id])
-            setBrickToMove({id: bricksMoved[lastId], direction: direction})
-            setBricks(bricksMoved)
-            id = lastId;
+        var thisID = idOfEmpty;
+        var lastId = idOfEmpty;
+        
+        switch(direction){
+            case _moveLeft:
+                while(id-1 > thisID){
+                    thisID = lastId;
+                    lastId = thisID + 1;
+                    var bricktemp = bricksMoved[lastId]
+                    bricksMoved[lastId] = bricksMoved[thisID]
+                    bricksMoved[thisID] = bricktemp
+                    setBrickToMove({id: bricksMoved[thisID], direction: direction})
+                }
+            break;
+            case _moveRight:
+                while(id+1 < thisID){
+                    thisID = lastId;
+                    lastId = thisID - 1;
+                    var bricktemp = bricksMoved[lastId]
+                    bricksMoved[lastId] = bricksMoved[thisID]
+                    bricksMoved[thisID] = bricktemp
+                    setBrickToMove({id: bricksMoved[thisID], direction: direction})
+                }
+            break;
+            case _moveUp:
+                while(id-rows > thisID){
+                    thisID = lastId;
+                    lastId = thisID + rows;
+                    var bricktemp = bricksMoved[lastId]
+                    bricksMoved[lastId] = bricksMoved[thisID]
+                    bricksMoved[thisID] = bricktemp
+                    setBrickToMove({id: bricksMoved[thisID], direction: direction})
+                }
+            break;
+            case _moveDown:
+                while(id+rows < thisID){
+                    thisID = lastId;
+                    lastId = thisID - rows;
+                    var bricktemp = bricksMoved[lastId]
+                    bricksMoved[lastId] = bricksMoved[thisID]
+                    bricksMoved[thisID] = bricktemp
+                    setBrickToMove({id: bricksMoved[thisID], direction: direction})
+                }
+            break;
         }
+        console.log("Save all")
+        setBricks(bricksMoved)
         checkOrder(bricksMoved)
         setNumberOfMoves(numberOfMoves+1)
     })
