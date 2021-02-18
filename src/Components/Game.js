@@ -14,6 +14,7 @@ export default function Game(props){
         id: -1,
         direction: null
     })
+    const [moveLine, setMoveLine] = useState(true)
 
 
     useEffect(() =>{
@@ -49,7 +50,7 @@ export default function Game(props){
             moveBrick(id,idOfEmpty,direction)
         }
         //Get more than one brick to move, move the whole line of bricks
-        else{
+        else if(moveLine){
             direction = chechIfLineIsEmpty(id, idOfEmpty)
             if(direction){
                 moveBricks(id,idOfEmpty,direction)
