@@ -6,8 +6,8 @@ import Winner from "./Winner"
 
 const _moveRight = "move_right";
 const _moveLeft = "move_left";
-const _moveDown = "move_up";
-const _moveUp = "move_down";
+const _moveDown = "move_down";
+const _moveUp = "move_up";
 
 export default function Game(props){
     const {columns, rows} = props;
@@ -85,9 +85,9 @@ export default function Game(props){
         }else if( (id+1) === idOfEmpty && (id+1)%columns){
             return _moveRight;
         }else if( (id-columns) === idOfEmpty){
-            return _moveDown;
-        }else if( (id+columns) === idOfEmpty){
             return _moveUp;
+        }else if( (id+columns) === idOfEmpty){
+            return _moveDown;
         }else{
             return false;
         }
@@ -107,49 +107,39 @@ export default function Game(props){
         var bricksMoved = [...bricks]
         var thisID = idOfEmpty;
         var lastId = idOfEmpty;
-        
-        switch(direction){
-            case _moveLeft:
-                while(id-1 > thisID){
-                    thisID = lastId;
-                    lastId = thisID + 1;
-                    var bricktemp = bricksMoved[lastId]
-                    bricksMoved[lastId] = bricksMoved[thisID]
-                    bricksMoved[thisID] = bricktemp
-                    setBrickToMove({id: bricksMoved[thisID], direction: direction})
+        console.log("ID: ",id)
+
+        while( ( direction === _moveLeft && (id-1 > thisID )) ||
+            ( direction === _moveRight && (id+1 < thisID )) ||
+            ( direction === _moveUp && (id-rows > thisID )) ||
+            ( direction === _moveDown && (id+rows < thisID )) ){
+                thisID = lastId;
+                switch(direction){
+                    case _moveLeft:
+                        lastId = thisID + 1;
+                        console.log("Left, ID to meet: ", id-1);
+                        break;
+                    case _moveRight:
+                        lastId = thisID - 1;
+                        console.log("Right, ID to meet: ", id+1);
+                        break;
+                    case _moveUp:
+                        lastId = thisID + rows;
+                        console.log("Up, ID to meet: ", id-rows);
+                        break;
+                    case _moveDown:
+                        lastId = thisID - rows;
+                        console.log("Down, ID to meet: ", id+rows);
+                        break;
                 }
-            break;
-            case _moveRight:
-                while(id+1 < thisID){
-                    thisID = lastId;
-                    lastId = thisID - 1;
-                    var bricktemp = bricksMoved[lastId]
-                    bricksMoved[lastId] = bricksMoved[thisID]
-                    bricksMoved[thisID] = bricktemp
-                    setBrickToMove({id: bricksMoved[thisID], direction: direction})
-                }
-            break;
-            case _moveUp:
-                while(id-rows > thisID){
-                    thisID = lastId;
-                    lastId = thisID + rows;
-                    var bricktemp = bricksMoved[lastId]
-                    bricksMoved[lastId] = bricksMoved[thisID]
-                    bricksMoved[thisID] = bricktemp
-                    setBrickToMove({id: bricksMoved[thisID], direction: direction})
-                }
-            break;
-            case _moveDown:
-                while(id+rows < thisID){
-                    thisID = lastId;
-                    lastId = thisID - rows;
-                    var bricktemp = bricksMoved[lastId]
-                    bricksMoved[lastId] = bricksMoved[thisID]
-                    bricksMoved[thisID] = bricktemp
-                    setBrickToMove({id: bricksMoved[thisID], direction: direction})
-                }
-            break;
+                console.log("LastID: ",lastId)
+
+                var bricktemp = bricksMoved[lastId]
+                bricksMoved[lastId] = bricksMoved[thisID]
+                bricksMoved[thisID] = bricktemp
+                setBrickToMove({id: bricksMoved[thisID], direction: direction})
         }
+        console.log("-------- NEXT --------")
         setBricks(bricksMoved)
         checkOrder(bricksMoved)
         setNumberOfMoves(numberOfMoves+1)
