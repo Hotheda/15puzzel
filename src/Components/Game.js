@@ -133,7 +133,6 @@ export default function Game(props){
                 bricksMoved[thisID] = bricktemp
                 setBrickToMove({id: bricksMoved[thisID], direction: direction})
         }
-        console.log("-------- NEXT --------")
         setBricks(bricksMoved)
         checkOrder(bricksMoved)
         setNumberOfMoves(numberOfMoves+1)
