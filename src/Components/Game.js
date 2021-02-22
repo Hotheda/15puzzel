@@ -107,7 +107,6 @@ export default function Game(props){
         var bricksMoved = [...bricks]
         var thisID = idOfEmpty;
         var lastId = idOfEmpty;
-        console.log("ID: ",id)
 
         while( ( direction === _moveLeft && (id-1 > thisID )) ||
             ( direction === _moveRight && (id+1 < thisID )) ||
@@ -117,22 +116,17 @@ export default function Game(props){
                 switch(direction){
                     case _moveLeft:
                         lastId = thisID + 1;
-                        console.log("Left, ID to meet: ", id-1);
                         break;
                     case _moveRight:
                         lastId = thisID - 1;
-                        console.log("Right, ID to meet: ", id+1);
                         break;
                     case _moveUp:
                         lastId = thisID + rows;
-                        console.log("Up, ID to meet: ", id-rows);
                         break;
                     case _moveDown:
                         lastId = thisID - rows;
-                        console.log("Down, ID to meet: ", id+rows);
                         break;
                 }
-                console.log("LastID: ",lastId)
 
                 var bricktemp = bricksMoved[lastId]
                 bricksMoved[lastId] = bricksMoved[thisID]
