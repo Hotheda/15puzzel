@@ -15,17 +15,22 @@ export default function Game(props){
     const [gameOver, setGameOver] = useState(false)
     const [onShuffle, setOnShuffle] = useState(false)
     const [bricks, setBricks] = useState([]);
-    const [brickToMove, setBrickToMove] = useState({
+    /*const [brickToMove, setBricksToMove] = useState({
         id: -1,
         direction: null
-    })
-    const [moveLine, setMoveLine] = useState(true)
+    })*/
+    const [moveLine, setMoveLine] = useState(false)
 
+    //console.log(bricks)
 
     useEffect(() =>{
         var bricks = []
         for(var i=0;i<(columns*rows);i++){
-            bricks.push(i);
+            if(i != 0){
+                bricks.push({number: i, direction: "brick"});
+            }else{
+                bricks.push({number: i, direction: "no_brick"});
+            }
         }
         const shuffledBricks = shuffle(bricks)
         setBricks(shuffledBricks)
@@ -42,13 +47,13 @@ export default function Game(props){
         }while(checkOrder(shuffleBricks))
         setGameOver(false)
         setNumberOfMoves(0)
-        setBrickToMove({id: -1, direction: null})
+        //setBricksToMove({id: -1, direction: "brick"})
         return shuffleBricks
     }
 
     const onBrickClick = ((num)=>{
-        const id = bricks.findIndex(element=>element===num)
-        const idOfEmpty = bricks.findIndex(element=>element===0)
+        const id = bricks.findIndex(element=>element.number===num)
+        const idOfEmpty = bricks.findIndex(element=>element.number===0)
 
         var direction = checkIfNeighboursIsEmpty(id,idOfEmpty)
         if(direction){
@@ -61,6 +66,17 @@ export default function Game(props){
                 moveBricks(id,idOfEmpty,direction)
             }
         }
+    })
+
+    const setBricksToMove = ((moveBricks)=>{
+        var tempBrickArray = [...bricks]
+        moveBricks.forEach(mv => {
+            console.log("From setBrickToMove: ", mv)
+            console.log(tempBrickArray)
+            console.log(mv.id)
+            tempBrickArray[mv.id].direction = mv.direction;
+        });
+        setBricks(tempBrickArray);
     })
 
     const checkIfLineIsEmpty = (id, idOfEmpty) => {
@@ -95,11 +111,11 @@ export default function Game(props){
 
     const moveBrick = ((id,idOfEmpty,direction)=>{
         var bricksMoved = [...bricks]
-        bricksMoved[idOfEmpty] = bricksMoved[id]
-        bricksMoved[id] = 0
+        bricksMoved[idOfEmpty].number = bricksMoved[id].number
+        bricksMoved[id].number = 0
         setBricks(bricksMoved)
         checkOrder(bricksMoved)
-        setBrickToMove({id: bricksMoved[idOfEmpty], direction: direction})
+        setBricksToMove([{id: idOfEmpty, direction: direction}])
         setNumberOfMoves(numberOfMoves+1)
     })
 
@@ -131,7 +147,7 @@ export default function Game(props){
                 var bricktemp = bricksMoved[lastId]
                 bricksMoved[lastId] = bricksMoved[thisID]
                 bricksMoved[thisID] = bricktemp
-                setBrickToMove({id: bricksMoved[thisID], direction: direction})
+                setBricksToMove({id: bricksMoved[thisID], direction: direction})
         }
         setBricks(bricksMoved)
         checkOrder(bricksMoved)
@@ -150,7 +166,7 @@ export default function Game(props){
     })
 
     const bricksToShow = bricks.map((num)=>{return(
-                <Brick key={num} brick_number={num} shuffle={onShuffle} brickToMove={brickToMove} onBrickClick={onBrickClick}/>
+                <Brick key={num.number} brick_number={num.number} shuffle={onShuffle} brickToMove={num.direction} onBrickClick={onBrickClick}/>
             )})
 
     const shuffleBricks = (()=>{
