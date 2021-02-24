@@ -15,13 +15,7 @@ export default function Game(props){
     const [gameOver, setGameOver] = useState(false)
     const [onShuffle, setOnShuffle] = useState(false)
     const [bricks, setBricks] = useState([]);
-    /*const [brickToMove, setBricksToMove] = useState({
-        id: -1,
-        direction: null
-    })*/
     const [moveLine, setMoveLine] = useState(false)
-
-    //console.log(bricks)
 
     useEffect(() =>{
         var bricks = []
@@ -47,7 +41,6 @@ export default function Game(props){
         }while(checkOrder(shuffleBricks))
         setGameOver(false)
         setNumberOfMoves(0)
-        //setBricksToMove({id: -1, direction: "brick"})
         return shuffleBricks
     }
 
@@ -70,10 +63,10 @@ export default function Game(props){
 
     const setBricksToMove = ((moveBricks)=>{
         var tempBrickArray = [...bricks]
+        for(var i=0; i<columns*rows; i++){
+            tempBrickArray[i].direction="brick"
+        }
         moveBricks.forEach(mv => {
-            console.log("From setBrickToMove: ", mv)
-            console.log(tempBrickArray)
-            console.log(mv.id)
             tempBrickArray[mv.id].direction = mv.direction;
         });
         setBricks(tempBrickArray);
