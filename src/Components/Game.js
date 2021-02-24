@@ -15,7 +15,7 @@ export default function Game(props){
     const [gameOver, setGameOver] = useState(false)
     const [onShuffle, setOnShuffle] = useState(false)
     const [bricks, setBricks] = useState([]);
-    const [moveLine, setMoveLine] = useState(false)
+    const [moveLine, setMoveLine] = useState(true)
 
     useEffect(() =>{
         var bricks = []
@@ -116,6 +116,7 @@ export default function Game(props){
         var bricksMoved = [...bricks]
         var thisID = idOfEmpty;
         var lastId = idOfEmpty;
+        var lineOfBricks = [];
 
         while( ( direction === _moveLeft && (id-1 > thisID )) ||
             ( direction === _moveRight && (id+1 < thisID )) ||
@@ -136,12 +137,13 @@ export default function Game(props){
                         lastId = thisID - rows;
                         break;
                 }
+                lineOfBricks.push({id: lastId, direction: direction})
 
                 var bricktemp = bricksMoved[lastId]
                 bricksMoved[lastId] = bricksMoved[thisID]
                 bricksMoved[thisID] = bricktemp
-                setBricksToMove({id: bricksMoved[thisID], direction: direction})
         }
+        setBricksToMove(lineOfBricks)
         setBricks(bricksMoved)
         checkOrder(bricksMoved)
         setNumberOfMoves(numberOfMoves+1)
