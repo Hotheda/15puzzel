@@ -110,12 +110,14 @@ body{
 }
 
 .no_brick{
+    user-select: none;
     display: table-cell;
     color: rgba(0, 0, 0, 0);
     font-size: max(3vmin);
 }
 
 .brick{
+    user-select: none;
     display: table-cell;
     text-align: center;
     vertical-align: middle;
@@ -186,6 +188,23 @@ body{
         width: 90.5vmin;
         height: 91vmin;
         left: calc(50% - 44.5vmin);
+    }
+    .brick p{
+        padding: 0;
+        margin: 0;
+        font-size: max(6vmin);
+        font-weight: 900;
+        text-shadow: 0vmin .4vmin .8vmin rgba(255, 255, 255, 0.3);
+    }
+    .shuffle_btn{
+        margin: 8vmax 0 3vmax 0;
+        font-size: 4vmin;
+    }
+    .size_input_div label{
+        font-size: 5vmin;
+    }
+    .size_input{
+        font-size: 5vmin;
     }
 }
 @media only screen and (min-width: 600px){
