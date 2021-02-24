@@ -32,6 +32,9 @@ export default function Game(props){
 
     const shuffle = (bricks)=>{
         var shuffleBricks = [...bricks]
+        for(var i=0; i<columns*rows; i++){
+            shuffleBricks[i].direction="brick"
+        }
         do{
             for(var i=0;i<30;i++){
                 var brickToMoveShuffle=Math.floor(Math.random()*shuffleBricks.length-1)

@@ -3,9 +3,14 @@ import React from "react"
 export default function Brick(props){
     var className = "no_brick"
 
-    if(props.shuffle && props.brick_number!==0){
-        className = "brick shuffle_brick"
-    }else if(props.brickToMove != "brick" && props.brick_number!==0){ //props.brick_number===props.brickToMove.id){
+    if(props.shuffle){
+        if(props.brick_number != 0){
+            className = "brick shuffle_brick"
+        }
+        else{
+            className = "no_brick"
+        }
+    }else if(props.brickToMove != "brick" && props.brick_number!==0){
         className = "brick " + props.brickToMove
     }else if(props.brick_number>0){
         className = "brick"
