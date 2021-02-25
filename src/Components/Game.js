@@ -155,7 +155,7 @@ export default function Game(props){
 
     const checkOrder = ((bricksMoved)=>{
         for(var i=0;i<bricksMoved.length-1;i++){
-            if(bricksMoved[i] !== i+1){
+            if(bricksMoved[i].number !== i+1){
                 return false;
             }
         }
