@@ -113,7 +113,9 @@ body{
     user-select: none;
     display: table-cell;
     color: rgba(0, 0, 0, 0);
-    font-size: max(3vmin);
+    font-size: max(0vmin);
+    padding: 0;
+    margin: 0;
 }
 
 .brick{
