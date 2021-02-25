@@ -198,6 +198,13 @@ body{
         font-weight: 900;
         text-shadow: 0vmin .4vmin .8vmin rgba(255, 255, 255, 0.3);
     }
+    .no_brick p{
+        padding: 0;
+        margin: 0;
+        font-size: max(6vmin);
+        font-weight: 900;
+        text-shadow: 0vmin .4vmin .8vmin rgba(255, 255, 255, 0.3);
+    }
     .shuffle_btn{
         margin: 8vmax 0 3vmax 0;
         font-size: 4vmin;
