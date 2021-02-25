@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "bfa1ebc52e89687eb93ff00c9f66c2be",
+    "revision": "ff6fbef3166dbcb05ea5a906fe5968ea",
     "url": "/15puzzel/index.html"
   },
   {
-    "revision": "d4bc8c624bcf8b7338a3",
-    "url": "/15puzzel/static/css/main.468a0034.chunk.css"
+    "revision": "d2550d7dce7e44484ce2",
+    "url": "/15puzzel/static/css/main.221c7a76.chunk.css"
   },
   {
     "revision": "02d775aa4cbbae710018",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/15puzzel/static/js/2.09684f32.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "d4bc8c624bcf8b7338a3",
-    "url": "/15puzzel/static/js/main.c47d60e5.chunk.js"
+    "revision": "d2550d7dce7e44484ce2",
+    "url": "/15puzzel/static/js/main.db68e7ea.chunk.js"
   },
   {
     "revision": "0515d7fd07ed6ce2a823",
