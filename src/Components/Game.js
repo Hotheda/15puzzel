@@ -20,7 +20,7 @@ export default function Game(props){
     useEffect(() =>{
         var bricks = []
         for(var i=0;i<(columns*rows);i++){
-            if(i != 0){
+            if(i !== 0){
                 bricks.push({number: i, direction: "brick"});
             }else{
                 bricks.push({number: i, direction: "no_brick"});
@@ -32,11 +32,11 @@ export default function Game(props){
 
     const shuffle = (bricks)=>{
         var shuffleBricks = [...bricks]
-        for(var i=0; i<columns*rows; i++){
-            shuffleBricks[i].direction="brick"
+        for(var brickToReset=0; brickToReset<columns*rows; brickToReset++){
+            shuffleBricks[brickToReset].direction="brick"
         }
         do{
-            for(var i=0;i<30;i++){
+            for(var shuffleCount=0;shuffleCount<30;shuffleCount++){
                 var brickToMoveShuffle=Math.floor(Math.random()*shuffleBricks.length-1)
                 shuffleBricks.splice(brickToMoveShuffle,0,shuffleBricks[shuffleBricks.length-1])
                 shuffleBricks.pop()
