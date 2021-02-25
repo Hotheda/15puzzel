@@ -42,7 +42,7 @@ export default function Game(props){
                 shuffleBricks.pop()
             }
         }while(checkOrder(shuffleBricks))
-        setGameOver(true)
+        setGameOver(false)
         setNumberOfMoves(0)
         return shuffleBricks
     }
